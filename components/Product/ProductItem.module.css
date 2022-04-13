@@ -1,0 +1,45 @@
+.container:not(hover) {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 180px;
+    height: 240px;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+}
+.container:hover {
+    width: 190px;
+    height: 260px;
+    transition: 0.3s ease-out;
+}
+
+.productImage {
+    background-color: #F8F8F8;
+    width: 100%;
+    height: 75%;
+}
+
+.productFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 25%;
+    padding: 12px 2vmin 12px 2vmin;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.productName {
+    font-size: 14px;
+    color: black;
+    font-family: "Verdana";
+}
+
+.productPrice {
+    font-size: 12px;
+    color: #808080;
+    font-family: "Verdana";
+    text-align: end;
+}

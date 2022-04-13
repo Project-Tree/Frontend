@@ -1,0 +1,43 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.openModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: model-bg-show 0.3s;
+}
+
+@keyframes model-bg-show {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}

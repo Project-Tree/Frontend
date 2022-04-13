@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "Recipekorea";
+    src: url('/fonts/Recipekorea.woff') format('woff');
+}
+
+.template {
+    background: url('/img/background.jpg') no-repeat center center fixed; 
+    height: 100vh;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;  
+}
+
+.bodyTemplate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 90vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    color: white;
+}
+
+.body {
+    font-family: "Recipekorea";
+    font-size: 64px;
+}
+
+@media (max-width: 600px) {
+    .body {font-size: 48px}
+}

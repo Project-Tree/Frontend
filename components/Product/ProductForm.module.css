@@ -1,0 +1,126 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 328px;
+  height: 626px;
+  background-color: white;
+}
+
+.inputImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 220px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.previewImage {
+  width: 200px;
+  height: 200px;
+}
+.imageIcon {
+  transform: scale(10);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.inputName {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 15px;
+}
+.inputName:focus {
+  outline: none;
+}
+
+.inputPrice {
+  -webkit-appearance: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 15px;
+}
+.inputPrice:focus {
+  outline: none;
+}
+.inputPrice::-webkit-outer-spin-button,
+.inputPrice::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.inputDescription {
+  resize: none;
+  height: 90px;
+  border: 2px solid #c4c4c4;
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+
+.inputDescription:focus {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.inputDescription::-webkit-scrollbar {
+  width: 4px;
+}
+
+.inputDescription::-webkit-scrollbar-track {
+  background-color: #c4c4c4;
+  border-radius: 100px;
+}
+
+.inputDescription::-webkit-scrollbar-thumb {
+  background-color: #00c1d4;
+  border-radius: 100px;
+}
+
+.buttonList {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.buttonCancel {
+  background-color: white;
+  color: #c4c4c4;
+  border: 1px solid #00c1d4;
+  border-radius: 5px;
+  width: 60px;
+  height: 40px;
+  cursor: pointer;
+}
+.buttonCancel:hover {
+  background-color: #ececec;
+  transition: 0.2s ease;
+}
+
+.buttonAddProduct {
+  background-color: #00c1d4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 90px;
+  height: 40px;
+  cursor: pointer;
+}
+.buttonAddProduct:hover {
+  background-color: #019eac;
+  transition: 0.2s ease;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 10px;
+  position: relative;
+  bottom: 10px;
+}

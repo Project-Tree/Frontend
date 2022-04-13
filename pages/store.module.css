@@ -1,0 +1,16 @@
+@font-face {
+    font-family: "Recipekorea";
+    src: url('/fonts/Recipekorea.woff') format('woff');
+}
+
+.container {
+    background-color: white;
+}
+
+.body {
+    display: flex;
+}
+
+@media (max-width: 600px) {
+    .body {font-size: 48px}
+}

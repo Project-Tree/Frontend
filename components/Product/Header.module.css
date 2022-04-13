@@ -1,0 +1,21 @@
+.template {
+    top: 0;
+    position: sticky;
+    display: flex;
+    height: 6vh;
+    padding-left: 20vw;
+}
+
+.leftHeader {
+    display: inline-flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    height: 50px;
+    image-rendering: -webkit-optimize-contrast;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    cursor: pointer;
+} 

@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  width: 328px;
+  height: 626px;
+  background-color: white;
+  gap: 10px;
+}
+
+.closeIcon {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-size: 20px;
+  color: #808080;
+  cursor: pointer;
+  width: 250px;
+  text-align: right;
+}
+
+.account {
+  padding-top: 10px;
+  padding-bottom: 60px;
+  color: black;
+  width: 250px;
+  overflow-wrap: anywhere;
+}
+
+.storeName {
+  color: black;
+  width: 200px;
+  overflow-wrap: anywhere;
+  font-weight: bold;
+}
+
+.totalPrice {
+  color: black;
+  width: 200px;
+  overflow-wrap: anywhere;
+  font-weight: bold;
+}
