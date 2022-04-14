@@ -1,8 +1,7 @@
-import style from './ProductForm.module.css';
-import ImageOutlined from '@mui/icons-material/ImageOutlined';
-import ProductFormInterface from '../../interfaces/ProductForm';
-import { FC, useEffect, useState, useRef } from 'react';
-import useIPFS from '../../hooks/useIPFS';
+import style from "./ProductForm.module.css";
+import ImageOutlined from "@mui/icons-material/ImageOutlined";
+import ProductFormInterface from "../../interfaces/ProductForm";
+import { FC, useEffect, useState, useRef } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -16,30 +15,32 @@ interface Errors {
 }
 
 const initialFormData: ProductFormInterface = {
-  imgData: '',
-  name: '',
+  imgData: "",
+  name: "",
   price: 0,
-  description: '',
+  description: "",
 };
 
 const ProductForm: FC<Props> = ({ isOpen, close, uploadAndAddProductItem }) => {
-  const [submitTrigger, setSubmitTrigger] = useState<boolean>(false);
-  const [ipfs] = useIPFS();
-
   const [formData, setFormData] =
     useState<ProductFormInterface>(initialFormData);
   const [previewImage, setPreviewImage] = useState<string>(null);
   const onChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const img: File = e.target.files[0];
-    setPreviewImage(URL.createObjectURL(img));
+    const imgURL = URL.createObjectURL(img);
+    setPreviewImage(imgURL);
 
     const reader = new window.FileReader();
     reader.readAsArrayBuffer(img);
     reader.onloadend = async () => {
-      setFormData((prev) => ({ ...prev, imgData: reader.result }));
+      setFormData((prev) => ({
+        ...prev,
+        imgData: reader.result,
+        imgURL: imgURL,
+      }));
     };
 
-    e.target.value = '';
+    e.target.value = "";
   };
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
@@ -55,61 +56,60 @@ const ProductForm: FC<Props> = ({ isOpen, close, uploadAndAddProductItem }) => {
   };
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    validateFormData();
-    setSubmitTrigger(!submitTrigger);
+
+    if (validateFormData()) {
+      uploadAndAddProductItem(formData);
+      close();
+
+      setFormData(initialFormData);
+      setPreviewImage("");
+    }
   };
 
   const [errors, setErrors] = useState<Errors>({});
   const validateFormData = () => {
-    if (formData.name === '') {
-      const err = 'Please enter product name';
+    let isValid = true;
+    if (formData.name === "") {
+      isValid = false;
+      const err = "Please enter product name";
       setErrors((prev) => ({ ...prev, name: err }));
     } else if (formData.name.length > 20) {
-      const err = 'Name length cannot be less than 20';
+      isValid = false;
+      const err = "Name length cannot be less than 20";
       setErrors((prev) => ({ ...prev, name: err }));
     } else {
       setErrors((prev) => ({ ...prev, name: null }));
     }
 
     if (formData.price < 0) {
-      const err = 'Price cannot be less than 0';
+      isValid = false;
+      const err = "Price cannot be less than 0";
       setErrors((prev) => ({ ...prev, price: err }));
     } else if (formData.price > 1000000000000000) {
-      const err = 'Price cannot be more than 100 billion';
+      isValid = false;
+      const err = "Price cannot be more than 100 billion";
+      setErrors((prev) => ({ ...prev, price: err }));
+    } else if (isNaN(formData.price)) {
+      const err = "Price must be number";
       setErrors((prev) => ({ ...prev, price: err }));
     } else {
       setErrors((prev) => ({ ...prev, price: null }));
     }
+
+    return isValid;
   };
-
-  const isInitialMount = useRef(true);
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-    let err: keyof Errors;
-    for (err in errors) {
-      if (errors[err]) return;
-    }
-    uploadAndAddProductItem(formData);
-    close();
-
-    setFormData(initialFormData);
-    setPreviewImage('');
-  }, [submitTrigger]);
 
   const onClickCancel = () => {
     close();
     setErrors({});
     setFormData(initialFormData);
-    setPreviewImage('');
+    setPreviewImage("");
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className={isOpen ? 'openModal modal' : 'modal'}>
+    <div className={isOpen ? "openModal modal" : "modal"}>
       <div className={style.container}>
         <label className={style.inputImage} htmlFor="inputImage">
           {previewImage ? (
@@ -121,13 +121,13 @@ const ProductForm: FC<Props> = ({ isOpen, close, uploadAndAddProductItem }) => {
         <input
           type="file"
           id="inputImage"
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={onChangeImage}
         ></input>
         <form className={style.formContainer}>
-          {errors['name'] ? (
+          {errors["name"] ? (
             <label className={style.errorMessage} htmlFor="inputName">
-              {errors['name']}
+              {errors["name"]}
             </label>
           ) : null}
           <input
@@ -137,9 +137,9 @@ const ProductForm: FC<Props> = ({ isOpen, close, uploadAndAddProductItem }) => {
             type="text"
             onChange={onChangeName}
           ></input>
-          {errors['price'] ? (
+          {errors["price"] ? (
             <label className={style.errorMessage} htmlFor="inputPrice">
-              {errors['price']}
+              {errors["price"]}
             </label>
           ) : null}
           <input

@@ -19,35 +19,36 @@ const useProduct = (): [
       },
     ]);
     const uploadAndAddProductItem = async (productForm: ProductFormInterface) => {
-        const body = {
-          name: productForm.name, 
-          price: productForm.price, 
-          description: productForm.description
-        }
         const created = ipfs.addAll([
           {
             path: "thumbnail", 
             content: productForm.imgData
           }, {
             path: "body", 
-            content: JSON.stringify(body)
+            content: JSON.stringify({
+              name: productForm.name, 
+              price: productForm.price, 
+              description: productForm.description
+            })
           }
         ]);
-        
-        let imgURL = ""
-        for await(let v of created) {
-          if (v.path === "thumbnail") {
-            imgURL = `https://${v.cid.toV1().toString()}.ipfs.infura-ipfs.io`
-          }
-        }
+
         const newProduct: ProductItemInterface = {
           id: nextProductID.current++,
-          img: imgURL,
+          img: productForm.imgURL,
           name: productForm.name, 
           price: productForm.price, 
           description: productForm.description
         }
         setProductItems((prev) => [...prev, newProduct]);
+        
+        let imgURL = ""
+        for await(let v of created) {
+          if (v.path === "thumbnail") {
+            imgURL = `https://${v.cid.toV1().toString()}.ipfs.infura-ipfs.io`
+            console.log(imgURL)
+          }
+        }
       }
     return [productItems, uploadAndAddProductItem]
 }
