@@ -1,7 +1,7 @@
-import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
-import style from './PaymentModal.module.css';
-import QRCode from 'react-qr-code';
-import { FC } from 'react';
+import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
+import style from "./PaymentModal.module.css";
+import QRCode from "react-qr-code";
+import { FC } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -14,14 +14,14 @@ const PaymentModal: FC<Props> = ({ isOpen, close, account, totalPrice }) => {
   const createQRCode = (to: string, value: number) => (
     <QRCode
       size={150}
-      value={`ethereum:${to}?value=${value}?chainId=`}
+      value={`ethereum:${to}?value=${value}?chainId=3`}
     ></QRCode>
   );
 
   if (!isOpen) return null;
 
   return (
-    <div className={isOpen ? 'openModal modal' : 'modal'}>
+    <div className={isOpen ? "openModal modal" : "modal"}>
       <div className={style.container}>
         <div className={style.closeIcon}>
           <ClearRoundedIcon onClick={close} />
