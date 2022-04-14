@@ -12,7 +12,7 @@ interface Props {
 
 const PaymentModal: FC<Props> = ({ isOpen, close, account, totalPrice }) => {
   const createQRCode = (to: string, value: number) => (
-    <QRCode size={150} value={`ethereum@3:${to}?value=${value}`}></QRCode>
+    <QRCode size={150} value={`ethereum:${to}@3?value=${value}`}></QRCode>
   );
 
   if (!isOpen) return null;
