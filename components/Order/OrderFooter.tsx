@@ -36,6 +36,7 @@ const OrderFooter: FC<Props> = ({
         close={closeModal}
         account={account}
         totalPrice={getTotalPrice}
+        treContract={treContract}
       ></PaymentModal>
     </>
   );

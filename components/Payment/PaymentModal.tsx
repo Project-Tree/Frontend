@@ -2,17 +2,28 @@ import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import style from "./PaymentModal.module.css";
 import QRCode from "react-qr-code";
 import { FC } from "react";
+import { Contract } from "ethers/lib/index";
 
 interface Props {
   isOpen: boolean;
   close: () => void;
   account: string;
   totalPrice: number;
+  treContract: Contract;
 }
 
-const PaymentModal: FC<Props> = ({ isOpen, close, account, totalPrice }) => {
+const PaymentModal: FC<Props> = ({
+  isOpen,
+  close,
+  account,
+  totalPrice,
+  treContract,
+}) => {
   const createQRCode = (to: string, value: number) => (
-    <QRCode size={150} value={`ethereum:${to}@3?value=${value}`}></QRCode>
+    <QRCode
+      size={150}
+      value={`ethereum:${treContract.address}@3/transfer?address=${account}&uint256=${totalPrice}`}
+    ></QRCode>
   );
 
   if (!isOpen) return null;
